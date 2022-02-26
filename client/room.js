@@ -23,11 +23,21 @@ socket.emit("joined-room", {
   name: name,
   roomId: roomId,
 })
+socket.on("start-drawing", startRoundDrawing)
+socket.on("start-guessing", startRoundGuessing)
 
 readyButton.addEventListener("click", () => {
   hide(readyButton)
   socket.emit("ready") // socket contains the user info so, no need to send that
 })
+
+function startRoundDrawing(word) {
+  wordElement.innerText = word
+}
+
+function startRoundGuessing() {
+  show(guessForm)
+}
 
 resetRound()
 
@@ -37,4 +47,8 @@ function resetRound() {
 
 function hide(element) {
   element.classList.add("hide")
+}
+
+function show(element) {
+  element.classList.remove("hide")
 }

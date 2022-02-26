@@ -44,5 +44,5 @@ io.on("connection", socket => {
 io.listen(3000)
 
 function getRandomEntry(array) {
-  array[Math.floor(Math.random() * array.length)]
+  return array[Math.floor(Math.random() * array.length)]
 }
