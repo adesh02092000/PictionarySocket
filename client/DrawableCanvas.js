@@ -1,4 +1,4 @@
-function DrawableCanvas(canvas, socket) {
+export default function DrawableCanvas(canvas, socket) {
   let prevPosition = null
 
   canvas.addEventListener("mousemove", e => {
@@ -14,4 +14,12 @@ function DrawableCanvas(canvas, socket) {
 
     prevPosition = newPosition
   })
+
+  function drawLine(start, end) {
+    const context = canvas.getContext("2d")
+    context.beginPath()
+    context.moveTo(start.x, start.y)
+    context.lineTo(end.x, end.y)
+    context.stroke()
+  }
 }

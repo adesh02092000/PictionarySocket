@@ -1,4 +1,5 @@
 import { io } from "socket.io-client"
+import DrawableCanvas from "./DrawableCanvas"
 
 const production = process.env.NODE_ENV === "production"
 const serverUrl = production ? "realsite.com" : "http://localhost:3000"
@@ -18,6 +19,7 @@ const wordElement = document.querySelector("[data-word]")
 const messagesElement = document.querySelector("[data-messages]")
 const readyButton = document.querySelector("[data-ready-btn]")
 const canvas = document.querySelector("[data-canvas]")
+const drawableCanvas = new DrawableCanvas(canvas, socket)
 
 socket.emit("joined-room", {
   name: name,
