@@ -20,6 +20,7 @@ const messagesElement = document.querySelector("[data-messages]")
 const readyButton = document.querySelector("[data-ready-btn]")
 const canvas = document.querySelector("[data-canvas]")
 const drawableCanvas = new DrawableCanvas(canvas, socket)
+const guessTemplate = document.querySelector("[data-guess-template]")
 
 socket.emit("joined-room", {
   name: name,
@@ -33,7 +34,24 @@ readyButton.addEventListener("click", () => {
   socket.emit("ready") // socket contains the user info so, no need to send that
 })
 
+guessForm.addEventListener("submit", e => {
+  e.preventDefault()
+  if (guessInput.value === "") return
+
+  displayGuess(name, guessInput.value)
+  guessInput.value = ""
+})
+
 window.addEventListener("resize", resizeCanvas)
+
+function displayGuess(guesserName, guess) {
+  const guessElement = guessTemplate.content.cloneNode(true)
+  const nameElement = guessElement.querySelector("[data-name]")
+  const messageElement = guessElement.querySelector("[data-text]")
+  nameElement.innerText = guesserName
+  messageElement.innerText = guess
+  messagesElement.append(guessElement)
+}
 
 function startRoundDrawing(word) {
   drawableCanvas.canDraw = true
