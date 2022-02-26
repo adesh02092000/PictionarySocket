@@ -30,6 +30,8 @@ io.on("connection", socket => {
       if (room.users.every(u => u.ready)) {
         room.word = getRandomEntry(WORDS)
         room.drawer = getRandomEntry(room.users)
+        io.to(room.drawer.id).emit("start-drawing", room.word)
+        room.drawer.socket.to(room.id).emit("start-guessing")
       }
     })
 
