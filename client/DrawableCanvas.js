@@ -1,6 +1,10 @@
 export default function DrawableCanvas(canvas, socket) {
   // added to this, so that it is accessable outside the function (since this is returned)
   this.canDraw = false
+  this.clearCanvas = function () {
+    const context = canvas.getContext("2d")
+    context.clearRect(0, 0, canvas.width, canvas.height)
+  }
 
   let prevPosition = null
 

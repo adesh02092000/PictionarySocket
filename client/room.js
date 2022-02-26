@@ -58,11 +58,14 @@ function displayGuess(guesserName, guess) {
 
 function startRoundDrawing(word) {
   drawableCanvas.canDraw = true
+  drawableCanvas.clearCanvas()
+
   wordElement.innerText = word
 }
 
 function startRoundGuessing() {
   show(guessForm)
+  drawableCanvas.clearCanvas()
 }
 
 function resizeCanvas() {
@@ -86,6 +89,7 @@ function resetRound(name, word) {
   }
 
   drawableCanvas.canDraw = false
+  show(readyButton)
   hide(guessForm)
 }
 
