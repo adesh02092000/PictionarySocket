@@ -10,6 +10,10 @@ export default function DrawableCanvas(canvas, socket) {
     const newPosition = { x: e.layerX, y: e.layerY }
     if (prevPosition != null) {
       drawLine(prevPosition, newPosition)
+      socket.emit("draw", {
+        start: prevPosition,
+        end: newPosition,
+      })
     }
 
     prevPosition = newPosition
