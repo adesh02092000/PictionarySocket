@@ -18,3 +18,13 @@ const wordElement = document.querySelector("[data-word]")
 const messagesElement = document.querySelector("[data-messages]")
 const readyButton = document.querySelector("[data-ready-btn]")
 const canvas = document.querySelector("[data-canvas]")
+
+resetRound()
+
+function resetRound() {
+  hide(guessForm)
+}
+
+function hide(element) {
+  element.classList.add("hide")
+}
