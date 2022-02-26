@@ -10,6 +10,7 @@ const io = new Server({
 })
 
 const rooms = {}
+const WORDS = ["Dog", "Man", "Bike", "Women"]
 
 io.on("connection", socket => {
   socket.on("joined-room", data => {
@@ -27,7 +28,8 @@ io.on("connection", socket => {
     socket.on("ready", () => {
       user.ready = true
       if (room.users.every(u => u.ready)) {
-        // start the game
+        room.word = getRandomEntry(WORDS)
+        room.drawer = getRandomEntry(room.users)
       }
     })
 
@@ -38,3 +40,7 @@ io.on("connection", socket => {
 })
 
 io.listen(3000)
+
+function getRandomEntry(array) {
+  array[Math.floor(Math.random() * array.length)]
+}
