@@ -33,6 +33,8 @@ readyButton.addEventListener("click", () => {
   socket.emit("ready") // socket contains the user info so, no need to send that
 })
 
+window.addEventListener("resize", resizeCanvas)
+
 function startRoundDrawing(word) {
   wordElement.innerText = word
 }
@@ -41,7 +43,16 @@ function startRoundGuessing() {
   show(guessForm)
 }
 
+function resizeCanvas() {
+  canvas.width = null
+  canvas.height = null
+  const clientDimensions = canvas.getBoundingClientRect()
+  canvas.width = clientDimensions.width
+  canvas.height = clientDimensions.height
+}
+
 resetRound()
+resizeCanvas()
 
 function resetRound() {
   hide(guessForm)
