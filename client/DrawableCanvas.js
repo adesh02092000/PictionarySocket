@@ -11,8 +11,8 @@ export default function DrawableCanvas(canvas, socket) {
     if (prevPosition != null) {
       drawLine(prevPosition, newPosition)
       socket.emit("draw", {
-        start: prevPosition,
-        end: newPosition,
+        start: normalizeCoordinates(prevPosition),
+        end: normalizeCoordinates(newPosition),
       })
     }
 
@@ -20,7 +20,9 @@ export default function DrawableCanvas(canvas, socket) {
   })
   // Don't continue the stroke once the mouse goes out of bounds
   canvas.addEventListener("mouseleave", () => (prevPosition = null))
-  socket.on("draw-line", drawLine)
+  socket.on("draw-line", (start, end) => {
+    drawLine(toCanvasSpace(start), toCanvasSpace(end))
+  })
 
   function drawLine(start, end) {
     const context = canvas.getContext("2d")
@@ -28,5 +30,19 @@ export default function DrawableCanvas(canvas, socket) {
     context.moveTo(start.x, start.y)
     context.lineTo(end.x, end.y)
     context.stroke()
+  }
+
+  function normalizeCoordinates(position) {
+    return {
+      x: position.x / canvas.width,
+      y: position.y / canvas.height,
+    }
+  }
+
+  function toCanvasSpace(position) {
+    return {
+      x: position.x * canvas.width,
+      y: position.y * canvas.height,
+    }
   }
 }
