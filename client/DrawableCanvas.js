@@ -20,6 +20,7 @@ export default function DrawableCanvas(canvas, socket) {
   })
   // Don't continue the stroke once the mouse goes out of bounds
   canvas.addEventListener("mouseleave", () => (prevPosition = null))
+  socket.on("draw-line", drawLine)
 
   function drawLine(start, end) {
     const context = canvas.getContext("2d")
