@@ -19,6 +19,11 @@ const messagesElement = document.querySelector("[data-messages]")
 const readyButton = document.querySelector("[data-ready-btn]")
 const canvas = document.querySelector("[data-canvas]")
 
+socket.emit("joined-room", {
+  name: name,
+  roomId: roomId,
+})
+
 resetRound()
 
 function resetRound() {

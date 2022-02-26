@@ -9,7 +9,9 @@ const io = new Server({
   },
 })
 io.on("connection", socket => {
-  console.log("Connected Successfully")
+  socket.on("joined-room", data => {
+    console.log(data)
+  })
 })
 
 io.listen(3000)
