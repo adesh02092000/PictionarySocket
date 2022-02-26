@@ -28,6 +28,7 @@ socket.emit("joined-room", {
 })
 socket.on("start-drawing", startRoundDrawing)
 socket.on("start-guessing", startRoundGuessing)
+socket.on("guess", displayGuess)
 
 readyButton.addEventListener("click", () => {
   hide(readyButton)
@@ -38,6 +39,7 @@ guessForm.addEventListener("submit", e => {
   e.preventDefault()
   if (guessInput.value === "") return
 
+  socket.emit("make-guess", { guess: guessInput.value })
   displayGuess(name, guessInput.value)
   guessInput.value = ""
 })

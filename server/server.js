@@ -39,6 +39,10 @@ io.on("connection", socket => {
       socket.to(room.id).emit("draw-line", data.start, data.end)
     })
 
+    socket.on("make-guess", data => {
+      socket.to(room.id).emit("guess", user.name, data.guess)
+    })
+
     socket.on("disconnect", () => {
       room.users = room.users.filter(u => u !== user)
     })
