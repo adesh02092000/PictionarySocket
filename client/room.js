@@ -6,9 +6,15 @@ const serverUrl = production ? "realsite.com" : "http://localhost:3000"
 const urlParams = new URLSearchParams(window.location.search)
 const name = urlParams.get("name")
 const roomId = urlParams.get("room-id")
-// console.log(name, roomId)
 
 if (!name || !roomId) window.location = "/index.html"
 
 const socket = io(serverUrl)
 console.log(socket)
+
+const guessForm = document.querySelector("[data-guess-form]")
+const guessInput = document.querySelector("[data-guess-input]")
+const wordElement = document.querySelector("[data-word]")
+const messagesElement = document.querySelector("[data-messages]")
+const readyButton = document.querySelector("[data-ready-btn]")
+const canvas = document.querySelector("[data-canvas]")
