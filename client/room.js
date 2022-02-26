@@ -60,12 +60,16 @@ function startRoundDrawing(word) {
   drawableCanvas.canDraw = true
   drawableCanvas.clearCanvas()
 
+  messagesElement.innerHTML = ""
   wordElement.innerText = word
 }
 
 function startRoundGuessing() {
   show(guessForm)
+  hide(wordElement)
   drawableCanvas.clearCanvas()
+  messagesElement.innerHTML = ""
+  wordElement.innerText = ""
 }
 
 function resizeCanvas() {
