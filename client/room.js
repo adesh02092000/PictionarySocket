@@ -29,6 +29,7 @@ socket.emit("joined-room", {
 socket.on("start-drawing", startRoundDrawing)
 socket.on("start-guessing", startRoundGuessing)
 socket.on("guess", displayGuess)
+socket.on("winner", resetRound)
 
 readyButton.addEventListener("click", () => {
   hide(readyButton)
@@ -75,7 +76,15 @@ function resizeCanvas() {
 resetRound()
 resizeCanvas()
 
-function resetRound() {
+function resetRound(name, word) {
+  // since word and name are optional params
+  if (word && name) {
+    wordElement.innerText = word
+    show(wordElement)
+    // show the winner
+    displayGuess(null, `${name} is the winner`)
+  }
+
   drawableCanvas.canDraw = false
   hide(guessForm)
 }
