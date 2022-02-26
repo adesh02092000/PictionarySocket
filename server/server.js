@@ -24,6 +24,13 @@ io.on("connection", socket => {
     room.users.push(user)
     socket.join(room.id)
 
+    socket.on("ready", () => {
+      user.ready = true
+      if (room.users.every(u => u.ready)) {
+        // start the game
+      }
+    })
+
     socket.on("disconnect", () => {
       room.users = room.users.filter(u => u !== user)
     })

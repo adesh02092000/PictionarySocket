@@ -24,6 +24,11 @@ socket.emit("joined-room", {
   roomId: roomId,
 })
 
+readyButton.addEventListener("click", () => {
+  hide(readyButton)
+  socket.emit("ready") // socket contains the user info so, no need to send that
+})
+
 resetRound()
 
 function resetRound() {
