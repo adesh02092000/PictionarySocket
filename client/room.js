@@ -36,6 +36,7 @@ readyButton.addEventListener("click", () => {
 window.addEventListener("resize", resizeCanvas)
 
 function startRoundDrawing(word) {
+  drawableCanvas.canDraw = true
   wordElement.innerText = word
 }
 
@@ -55,6 +56,7 @@ resetRound()
 resizeCanvas()
 
 function resetRound() {
+  drawableCanvas.canDraw = false
   hide(guessForm)
 }
 

@@ -1,8 +1,11 @@
 export default function DrawableCanvas(canvas, socket) {
+  // added to this, so that it is accessable outside the function (since this is returned)
+  this.canDraw = false
+
   let prevPosition = null
 
   canvas.addEventListener("mousemove", e => {
-    if (e.buttons !== 1) {
+    if (e.buttons !== 1 || !this.canDraw) {
       prevPosition = null
       return
     }
